@@ -514,7 +514,7 @@ class Encore {
      * * `name` set to the value of the "name" parameter
      *
      * @param {string} name The chunk name (e.g. vendor to create a vendor.js)
-     * @param {object} options Cache group option
+     * @param {webpack.Options.CacheGroupsOptions&{node_modules?: string[]}} options Cache group option
      * @returns {Encore}
      */
     addCacheGroup(name, options) {
@@ -522,6 +522,10 @@ class Encore {
 
         return this;
     }
+
+    /**
+     * @typedef {{from: string, pattern?: RegExp|string, to?: string, includeSubdirectories?: boolean, context?: string}} CopyFilesOptions
+     */
 
     /**
      * Copy files or folders to the build directory.
@@ -583,7 +587,7 @@ class Encore {
      *      * {string} context (default: path of the source directory)
      *              The context to use as a root path when copying files.
      *
-     * @param {object|Array} configs
+     * @param {CopyFilesOptions|CopyFilesOptions[]} configs
      * @returns {Encore}
      */
     copyFiles(configs) {
@@ -831,7 +835,7 @@ class Encore {
      *              // https://www.npmjs.com/package/resolve-url-loader#options
      *
      * @param {function(object): object|void} sassLoaderOptionsCallback
-     * @param {object} encoreOptions
+     * @param {{resolveUrlLoader?: boolean, resolveUrlLoaderOptions?: object}} encoreOptions
      * @returns {Encore}
      */
     enableSassLoader(sassLoaderOptionsCallback = () => {}, encoreOptions = {}) {
@@ -963,7 +967,7 @@ class Encore {
      *              if useBuiltIns isn't set to false.
      *
      * @param {(function(object): object|void)|null} callback
-     * @param {object} encoreOptions
+     * @param {{exclude?: webpack.RuleSetCondition, includeNodeModules?: string[], useBuiltIns?: 'usage' | 'entry' | false, corejs?: number|string|object}} encoreOptions
      * @returns {Encore}
      */
     configureBabel(callback, encoreOptions = {}) {
@@ -1058,7 +1062,7 @@ class Encore {
      * Encore.enablePreactPreset({ preactCompat: true })
      * ```
      *
-     * @param {object} options
+     * @param {{preactCompat?: boolean}} options
      * @returns {Encore}
      */
     enablePreactPreset(options = {}) {
@@ -1190,7 +1194,7 @@ class Encore {
      *              in order to enable JSX usage in Vue components.
      *
      * @param {function(object): object|void} vueLoaderOptionsCallback
-     * @param {object} encoreOptions
+     * @param {{useJsx?: boolean, version?: number, runtimeCompilerBuild?: boolean}} encoreOptions
      * @returns {Encore}
      */
     enableVueLoader(vueLoaderOptionsCallback = () => {}, encoreOptions = {}) {
@@ -1236,7 +1240,7 @@ class Encore {
      * ```
      *
      * @param {string|object|(function(object): object|void)} eslintLoaderOptionsOrCallback
-     * @param {object} encoreOptions
+     * @param {{lintVue?: boolean}} encoreOptions
      * @returns {Encore}
      */
     enableEslintLoader(eslintLoaderOptionsOrCallback = () => {}, encoreOptions = {}) {
@@ -1378,7 +1382,7 @@ class Encore {
      * make sure that your "js" and "css" filenames contain
      * "[contenthash]".
      *
-     * @param {object} filenames
+     * @param {{js?: string, css?: string, images?: string, fonts?: string}} filenames
      * @returns {Encore}
      */
     configureFilenames(filenames) {
@@ -1407,7 +1411,7 @@ class Encore {
      * If a key (e.g. fonts) doesn't exists or contains a
      * falsy value the file-loader will be used instead.
      *
-     * @param {object} urlLoaderOptions
+     * @param {{images?: false|object, fonts?: false|object}} urlLoaderOptions
      * @return {Encore}
      */
     configureUrlLoader(urlLoaderOptions = {}) {
