@@ -350,7 +350,7 @@ class Encore {
      * })
      * ```
      *
-     * @param {object} aliases
+     * @param {Object<string, string>} aliases
      *
      * @returns {Encore}
      */
@@ -742,7 +742,7 @@ class Encore {
      *  This is useful for older packages, that might
      *  expect jQuery (or something else) to be a global variable.
      *
-     * @param {object} variables
+     * @param {Object<string, string|string[]>} variables
      * @returns {Encore}
      */
     autoProvideVariables(variables) {
