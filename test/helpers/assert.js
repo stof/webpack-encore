@@ -32,7 +32,7 @@ const readOutputFile = function(webpackConfig, filePath) {
 
 class Assert {
     /**
-     * @param {WebpackConfig} webpackConfig
+     * @param {import('../../lib/WebpackConfig')} webpackConfig
      */
     constructor(webpackConfig) {
         this.webpackConfig = webpackConfig;
@@ -130,11 +130,11 @@ class Assert {
 
     /**
      *
-     * @param {Browser} browser
+     * @param {import('zombie')} browser
      * @param {Array}   expectedResourcePaths Array of expected resources, but just
      *                  their short filenames - e.g. main.css
      *                  (i.e. without the public path)
-     * @return {void}
+     * @returns {void}
      */
     assertResourcesLoadedCorrectly(browser, expectedResourcePaths) {
         const actualResources = [];

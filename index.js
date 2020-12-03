@@ -114,7 +114,7 @@ class Encore {
      * })
      * ```
      *
-     * @param {function} definePluginOptionsCallback
+     * @param {Function} definePluginOptionsCallback
      * @returns {Encore}
      */
     configureDefinePlugin(definePluginOptionsCallback = () => {}) {
@@ -135,7 +135,7 @@ class Encore {
      * })
      * ```
      *
-     * @param {function} friendlyErrorsPluginOptionsCallback
+     * @param {Function} friendlyErrorsPluginOptionsCallback
      * @returns {Encore}
      */
     configureFriendlyErrorsPlugin(friendlyErrorsPluginOptionsCallback = () => {}) {
@@ -156,7 +156,7 @@ class Encore {
      * })
      * ```
      *
-     * @param {function} manifestPluginOptionsCallback
+     * @param {Function} manifestPluginOptionsCallback
      * @returns {Encore}
      */
     configureManifestPlugin(manifestPluginOptionsCallback = () => {}) {
@@ -182,7 +182,7 @@ class Encore {
      * })
      * ```
      *
-     * @param {function} terserPluginOptionsCallback
+     * @param {Function} terserPluginOptionsCallback
      * @returns {Encore}
      */
     configureTerserPlugin(terserPluginOptionsCallback = () => {}) {
@@ -206,7 +206,7 @@ class Encore {
      * })
      * ```
      *
-     * @param {function} optimizeCssPluginOptionsCallback
+     * @param {Function} optimizeCssPluginOptionsCallback
      * @returns {Encore}
      */
     configureOptimizeCssPlugin(optimizeCssPluginOptionsCallback = () => {}) {
@@ -350,7 +350,7 @@ class Encore {
      * })
      * ```
      *
-     * @param {Object<string, string>} aliases
+     * @param {object<string, string>} aliases
      *
      * @returns {Encore}
      */
@@ -746,7 +746,7 @@ class Encore {
      *  This is useful for older packages, that might
      *  expect jQuery (or something else) to be a global variable.
      *
-     * @param {Object<string, string|string[]>} variables
+     * @param {object<string, string | string[]>} variables
      * @returns {Encore}
      */
     autoProvideVariables(variables) {
@@ -1237,7 +1237,6 @@ class Encore {
      * Supported options:
      *      * {boolean} lintVue (default=false)
      *              Configure the loader to lint `.vue` files
-     * ```
      *
      * @param {string|object|(function(object): object|void)} eslintLoaderOptionsOrCallback
      * @param {{lintVue?: boolean}} encoreOptions
@@ -1331,6 +1330,7 @@ class Encore {
      *
      * Internally, this disables the mini-css-extract-plugin
      * and uses the style-loader instead.
+     *
      * @param {boolean} disabled
      * @returns {Encore}
      */
@@ -1412,7 +1412,7 @@ class Encore {
      * falsy value the file-loader will be used instead.
      *
      * @param {{images?: false|object, fonts?: false|object}} urlLoaderOptions
-     * @return {Encore}
+     * @returns {Encore}
      */
     configureUrlLoader(urlLoaderOptions = {}) {
         webpackConfig.configureUrlLoader(urlLoaderOptions);
@@ -1440,7 +1440,7 @@ class Encore {
      *
      * @param {string} name
      * @param {function(webpack.RuleSetRule): webpack.RuleSetRule|void} callback
-     * @return {Encore}
+     * @returns {Encore}
      */
     configureLoaderRule(name, callback) {
         webpackConfig.configureLoaderRule(name, callback);
@@ -1633,7 +1633,7 @@ class Encore {
 
     /**
      * @deprecated
-     * @return {void}
+     * @returns {void}
      */
     configureExtractTextPlugin() {
         throw new Error('The configureExtractTextPlugin() method was removed from Encore. The underlying plugin was removed from Webpack 4.');
@@ -1641,7 +1641,7 @@ class Encore {
 
     /**
      * @deprecated
-     * @return {void}
+     * @returns {void}
      */
     enableCoffeeScriptLoader() {
         throw new Error('The enableCoffeeScriptLoader() method and CoffeeScript support was removed from Encore due to support problems with Webpack 4. If you are interested in this feature, please submit a pull request!');
@@ -1649,7 +1649,7 @@ class Encore {
 
     /**
      * @deprecated
-     * @return {void}
+     * @returns {void}
      */
     configureUglifyJsPlugin() {
         throw new Error('The configureUglifyJsPlugin() method was removed from Encore due to uglify-js dropping ES6+ support in its latest version. Please use configureTerserPlugin() instead.');
@@ -1657,7 +1657,7 @@ class Encore {
 
     /**
      * @deprecated
-     * @return {void}
+     * @returns {void}
      */
     configureLoaderOptionsPlugin() {
         throw new Error('The configureLoaderOptionsPlugin() method was removed from Encore. The underlying plugin should not be needed anymore unless you are using outdated loaders. If that\'s the case you can still add it using addPlugin().');
@@ -1667,6 +1667,7 @@ class Encore {
 /**
  * Proxy the API in order to prevent calls to most of its methods
  * if the webpackConfig object hasn't been initialized yet.
+ *
  * @type {Encore}
  */
 module.exports = EncoreProxy.createProxy(new Encore());
